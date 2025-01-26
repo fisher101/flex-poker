@@ -64,19 +64,19 @@ div[data-still-in-hand='false'] {
   overflow-y: scroll;
 }
 
+/* 页脚样式 */
 footer {
-  position: absolute;
-  bottom: 0;
+  flex-shrink: 0; /* 防止页脚被压缩 */
   width: 100%;
-  height: 30px;
-  background-color: #f8f8f8;
+  background-color: #f8f8f8; /* 背景色 */
 }
 
 footer .container {
   display: flex;
   justify-content: space-around;
   align-items: center;
-	flex-flow: row wrap;
+  flex-flow: row wrap;
+  padding: 10px 0; /* 可根据需要调整内边距 */
 }
 
 footer .container p {
