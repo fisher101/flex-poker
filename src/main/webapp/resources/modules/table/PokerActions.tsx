@@ -42,21 +42,21 @@ const PokerActions = ({ gameId, tableId, actionOn, callAmount, minRaiseTo, maxRa
   return (
     <div>
       <div className={actionOn ? '' : 'hidden'}>
-        <button className={callAmount === 0 ? '' : 'hidden'} onClick={check.bind(null, gameId, tableId, setCurrentRaiseTo)}>Check</button>
-        <button className={callAmount > 0 ? '' : 'hidden'} onClick={call.bind(null, gameId, tableId, setCurrentRaiseTo)}>Call {callAmount}</button>
+        <button className={callAmount === 0 ? '' : 'hidden'} onClick={check.bind(null, gameId, tableId, setCurrentRaiseTo)}>看牌</button>
+        <button className={callAmount > 0 ? '' : 'hidden'} onClick={call.bind(null, gameId, tableId, setCurrentRaiseTo)}>跟注 {callAmount}</button>
         <button className={minRaiseTo > 0 ? '' : 'hidden'} onClick={raise.bind(null, gameId, tableId, minRaiseTo, maxRaiseTo, currentRaiseTo, setCurrentRaiseTo)}>
           Raise to {validRaise(minRaiseTo, maxRaiseTo, currentRaiseTo) ? currentRaiseTo : '--'}
         </button>
         <input type="number" min={minRaiseTo} max={maxRaiseTo} value={currentRaiseTo || ""}
                onChange={handleRaiseChangeEvent.bind(null, setCurrentRaiseTo)} />
-        <label className={validRaise(minRaiseTo, maxRaiseTo, currentRaiseTo) ? 'hidden' : ''}>Invalid raise</label>
-        <button className={callAmount > 0 ? '' : 'hidden'} onClick={fold.bind(null, gameId, tableId, setCurrentRaiseTo)}>Fold</button>
+        <label className={validRaise(minRaiseTo, maxRaiseTo, currentRaiseTo) ? 'hidden' : ''}>无效加注</label>
+        <button className={callAmount > 0 ? '' : 'hidden'} onClick={fold.bind(null, gameId, tableId, setCurrentRaiseTo)}>弃牌</button>
       </div>
       <div className={actionOn ? 'hidden' : ''}>
-        <input type="checkbox" id="check-checkbox" /><label htmlFor="check-checkbox">Check</label>
-        <input type="checkbox" id="call-checkbox" /><label htmlFor="call-checkbox">Call</label>
-        <input type="checkbox" id="raise-checkbox" /><label htmlFor="raise-checkbox">Raise</label>
-        <input type="checkbox" id="fold-checkbox" /><label htmlFor="fold-checkbox">Fold</label>
+        <input type="checkbox" id="check-checkbox" /><label htmlFor="check-checkbox">看牌</label>
+        <input type="checkbox" id="call-checkbox" /><label htmlFor="call-checkbox">跟注</label>
+        <input type="checkbox" id="raise-checkbox" /><label htmlFor="raise-checkbox">加注</label>
+        <input type="checkbox" id="fold-checkbox" /><label htmlFor="fold-checkbox">弃牌</label>
       </div>
     </div>
   )
