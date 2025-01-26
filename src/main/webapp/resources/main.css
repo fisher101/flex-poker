@@ -1,30 +1,15 @@
-/* 添加移动端基础适配 */
-@media (max-width: 768px) {
-  html {
-    font-size: 14px;
-  }
-}
-
 .error-message {
   color: #ff0000;
-  margin: 5px 0; /* 增加间距避免遮挡 */
 }
 
 .row-top-buffer {
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-  .row-top-buffer {
-    margin-top: 10px; /* 手机端减少间距 */
-  }
-}
-
 .standard-form {
   max-width: 350px;
-  width: 100%; /* 确保手机端宽度自适应 */
   margin: 0 auto;
-  padding: 0 15px; /* 添加两侧留白 */
+  padding-bottom: 30px; /* 新增防遮挡 */
 }
 
 .hidden {
@@ -33,68 +18,69 @@
 
 .game-list {
   margin-top: 10px;
-  overflow: auto; /* 防止内容溢出 */
+  padding-bottom: 30px; /* 新增防遮挡 */
 }
 
 .poker-table {
-  background: url(/resources/img/Table.svg) no-repeat center/contain; /* 保持背景图适配 */
-  min-height: 200px; /* 添加最小高度 */
-  position: relative;
+  background: url(/resources/img/Table.svg) no-repeat;
 }
 
-@media (max-width: 768px) {
-  .poker-table {
-    background-size: cover; /* 手机端全尺寸显示 */
-  }
+.my-cards {
+  width: 100px;
+  height: 100px;
 }
 
-.my-cards,
 .common-card {
-  width: 80px;  /* 缩小卡片尺寸 */
-  height: 80px;
-  margin: 5px;
-}
-
-@media (max-width: 768px) {
-  .my-cards,
-  .common-card {
-    width: 60px;  /* 手机端更小尺寸 */
-    height: 60px;
-  }
+  width: 100px;
+  height: 100px;
 }
 
 .my-seat {
-  box-shadow: inset 0 0 0.5em gold; /* 调小发光效果 */
+  box-shadow: inset 0 0 1em gold;
 }
 
-div[data-action-on='true'],
+div[data-action-on='true'] {
+  background-color: #00FF00;
+}
+
 div[data-action-on='false'] {
-  padding: 8px; /* 增加触摸区域 */
-  font-size: 0.9rem;
+  background-color: #FF0000;
+}
+
+div[data-still-in-hand='true'] {
+  color: #0000FF;
+}
+
+div[data-still-in-hand='false'] {
+  color: #FF00FF;
 }
 
 .chat-area input[type=text] {
-  width: calc(100% - 20px); /* 保留输入框两侧间距 */
-  margin: 0 10px;
+  width: 100%;
+  font-size: 16px; /* 防止手机缩放 */
 }
 
 .chat-text-display-area {
   background-color: #eeeeee;
-  height: 100px; /* 降低高度 */
-  max-height: 30vh; /* 使用视窗单位 */
+  height: 150px;
   width: 100%;
-  overflow-y: auto;
-  padding: 5px;
+  overflow-y: scroll;
+}
+
+/* 全局布局调整 */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden; /* 防横向溢出 */
 }
 
 footer {
-  position: fixed; /* 改为固定定位 */
-  bottom: 0;
+  position: relative; /* 修改定位方式 */
+  margin-top: auto;   /* 关键粘性定位 */
   width: 100%;
-  height: auto; /* 自动高度 */
-  min-height: 40px; /* 增加最小高度 */
+  height: 60px;       /* 调整高度 */
   background-color: #f8f8f8;
-  padding: 10px 0;
 }
 
 footer .container {
@@ -102,24 +88,37 @@ footer .container {
   justify-content: space-around;
   align-items: center;
   flex-flow: row wrap;
-  gap: 10px; /* 增加元素间距 */
 }
 
 footer .container p {
   color: #777777;
-  margin: 5px 0; /* 替代padding-top */
-  font-size: 0.8rem; /* 缩小字体 */
+  padding-top: 5px;
 }
 
 nav {
-  min-height: 40px; /* 降低导航高度 */
-  margin-bottom: 15px;
-  border: 1px solid #e7e7e7;
-  padding: 0 15px;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-color: #e7e7e7;
 }
 
-/* 添加z-index层级管理 */
-.poker-table { z-index: 1; }
-.my-seat { z-index: 2; }
-.chat-area { z-index: 3; }
-footer { z-index: 100; } /* 确保页脚在最上层 */
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .poker-table {
+    background-size: cover; /* 背景适配 */
+  }
+  
+  .my-cards,
+  .common-card {
+    width: 70px;  /* 缩小尺寸 */
+    height: 70px;
+  }
+
+  .chat-text-display-area {
+    height: 120px; /* 调整高度 */
+  }
+
+  nav {
+    margin-bottom: 10px; /* 减少间距 */
+  }
+}
