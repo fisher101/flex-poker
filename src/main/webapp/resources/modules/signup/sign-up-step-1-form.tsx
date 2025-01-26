@@ -5,8 +5,8 @@ export default ({ error, submitFormCallback }) => {
     <Form className="standard-form" id="sign-up-step-1-form" onSubmit={submitFormCallback}>
       <h3 className="mb-3 fw-normal">注册账号</h3>
       { error ? <p className="error-message">{error}</p> : null }
-      <Form.FloatingLabel label="设置用户名" className="mb-1">
-        <Form.Control type="text" name="username" placeholder="设置用户名" required autoFocus />
+      <Form.FloatingLabel label="设置用户名（英文字母）" className="mb-1">
+        <Form.Control type="text" name="username" placeholder="设置用户名（英文字母）" required autoFocus />
       </Form.FloatingLabel>
       <Form.FloatingLabel label="设置密码" className="mb-1">
         <Form.Control type="password" name="password" placeholder="设置密码" required />
