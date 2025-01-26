@@ -1,14 +1,30 @@
+/* 添加移动端基础适配 */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 .error-message {
-	color: #ff0000;
+  color: #ff0000;
+  margin: 5px 0; /* 增加间距避免遮挡 */
 }
 
 .row-top-buffer {
-	margin-top: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .row-top-buffer {
+    margin-top: 10px; /* 手机端减少间距 */
+  }
 }
 
 .standard-form {
-	max-width: 350px;
-	margin: 0 auto;
+  max-width: 350px;
+  width: 100%; /* 确保手机端宽度自适应 */
+  margin: 0 auto;
+  padding: 0 15px; /* 添加两侧留白 */
 }
 
 .hidden {
@@ -17,58 +33,68 @@
 
 .game-list {
   margin-top: 10px;
+  overflow: auto; /* 防止内容溢出 */
 }
 
 .poker-table {
-  background: url(/resources/img/Table.svg) no-repeat;
+  background: url(/resources/img/Table.svg) no-repeat center/contain; /* 保持背景图适配 */
+  min-height: 200px; /* 添加最小高度 */
+  position: relative;
 }
 
-.my-cards {
-  width: 100px;
-  height: 100px;
+@media (max-width: 768px) {
+  .poker-table {
+    background-size: cover; /* 手机端全尺寸显示 */
+  }
 }
 
+.my-cards,
 .common-card {
-  width: 100px;
-  height: 100px;
+  width: 80px;  /* 缩小卡片尺寸 */
+  height: 80px;
+  margin: 5px;
+}
+
+@media (max-width: 768px) {
+  .my-cards,
+  .common-card {
+    width: 60px;  /* 手机端更小尺寸 */
+    height: 60px;
+  }
 }
 
 .my-seat {
-  box-shadow: inset 0 0 1em gold;
+  box-shadow: inset 0 0 0.5em gold; /* 调小发光效果 */
 }
 
-div[data-action-on='true'] {
-  background-color: #00FF00;
-}
-
+div[data-action-on='true'],
 div[data-action-on='false'] {
-  background-color: #FF0000;
-}
-
-div[data-still-in-hand='true'] {
-  color: #0000FF;
-}
-
-div[data-still-in-hand='false'] {
-  color: #FF00FF;
+  padding: 8px; /* 增加触摸区域 */
+  font-size: 0.9rem;
 }
 
 .chat-area input[type=text] {
-  width: 100%;
+  width: calc(100% - 20px); /* 保留输入框两侧间距 */
+  margin: 0 10px;
 }
 
 .chat-text-display-area {
   background-color: #eeeeee;
-  height: 150px;
+  height: 100px; /* 降低高度 */
+  max-height: 30vh; /* 使用视窗单位 */
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
+  padding: 5px;
 }
 
-/* 页脚样式 */
 footer {
-  flex-shrink: 0; /* 防止页脚被压缩 */
+  position: fixed; /* 改为固定定位 */
+  bottom: 0;
   width: 100%;
-  background-color: #f8f8f8; /* 背景色 */
+  height: auto; /* 自动高度 */
+  min-height: 40px; /* 增加最小高度 */
+  background-color: #f8f8f8;
+  padding: 10px 0;
 }
 
 footer .container {
@@ -76,17 +102,24 @@ footer .container {
   justify-content: space-around;
   align-items: center;
   flex-flow: row wrap;
-  padding: 10px 0; /* 可根据需要调整内边距 */
+  gap: 10px; /* 增加元素间距 */
 }
 
 footer .container p {
   color: #777777;
-	padding-top: 5px;
+  margin: 5px 0; /* 替代padding-top */
+  font-size: 0.8rem; /* 缩小字体 */
 }
 
 nav {
-	min-height: 50px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-color: #e7e7e7;
+  min-height: 40px; /* 降低导航高度 */
+  margin-bottom: 15px;
+  border: 1px solid #e7e7e7;
+  padding: 0 15px;
 }
+
+/* 添加z-index层级管理 */
+.poker-table { z-index: 1; }
+.my-seat { z-index: 2; }
+.chat-area { z-index: 3; }
+footer { z-index: 100; } /* 确保页脚在最上层 */
